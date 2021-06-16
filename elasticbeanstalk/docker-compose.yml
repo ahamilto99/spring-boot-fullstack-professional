@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   backend:
-    image: "hami0334/springboot-react-fullstack:16.6.2021.0.42.25"
+    image: "hami0334/springboot-react-fullstack:16.6.2021.1.4.28"
     ports: 
       - "80:8080"   # the - represents an element in an array
     restart: "always"
