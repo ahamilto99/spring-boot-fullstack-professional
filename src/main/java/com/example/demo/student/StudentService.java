@@ -3,8 +3,6 @@ package com.example.demo.student;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.student.exception.BadRequestException;
@@ -25,10 +23,10 @@ public class StudentService {
     }
 
     public void addStudent(Student student) {
-        Example<Student> studentExample = Example.of(student,
-                ExampleMatcher.matchingAny().withIgnorePaths("gender", "name").withIgnoreCase("email"));
+//        Example<Student> studentExample = Example.of(student,
+//                ExampleMatcher.matchingAny().withIgnorePaths("gender", "name").withIgnoreCase("email"));
 
-        if (studentRepo.exists(studentExample)) {
+        if (studentRepo.selectExistsEmail(student.getEmail())) {
             throw new BadRequestException("Email " + student.getEmail() + " is taken");
         }
 

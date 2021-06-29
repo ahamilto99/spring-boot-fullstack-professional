@@ -11,8 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 public interface StudentRepository extends JpaRepository<Student, Long>, QueryByExampleExecutor<Student> { // @formatter:off
 
     @Query("SELECT"
-            + " CASE WHEN(COUNT(s.email) > 0) THEN TRUE ELSE FALSE END"
-            + " FROM Student s")
-    Boolean doesEmailExist(String email);
+            + " CASE WHEN COUNT(s) > 0 THEN TRUE ELSE FALSE END"
+            + " FROM Student s"
+            + " WHERE s.email = ?1")
+    boolean selectExistsEmail(String email);
+    
+    
+    Student findFirstByOrderByIdDesc();
     
 } // @formatter:on
